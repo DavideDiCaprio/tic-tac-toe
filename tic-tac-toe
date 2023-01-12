@@ -1,4 +1,4 @@
-my version of tic tac toe game
+#my version of tic tac toe game
 
 def is_any_move_possible(board) -> bool:
   
@@ -9,8 +9,8 @@ def is_any_move_possible(board) -> bool:
   return False
   
   
-  def check_horizontal_win(board):
-
+def check_horizontal_win(board):
+  
   for i in range(len(board)):
     if board[i] == ["O","O","O"]:
       return "O"
@@ -71,6 +71,3 @@ def get_winner(board):
 
   else :
     return None
-
-print(get_winner(board=(["O","O","X"],["O","X"," "],[" ","X","O"])))
-print(get_winner(board=(["X"," "," "],[" ","X"," "],[" "," ","X"])))
