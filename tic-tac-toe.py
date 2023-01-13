@@ -1,11 +1,11 @@
 #my version of tic tac toe game
 
+
 def is_any_move_possible(board) -> bool:
   
   for i in range(len(board)):
     if board[i][i] == " ":
       return True
-
   return False
   
   
@@ -15,9 +15,9 @@ def check_horizontal_win(board):
     if board[i] == ["O","O","O"]:
       return "O"
     elif board[i] == ["X","X","X"]:
-      return "X"
-      
+      return "X"  
   return None 
+
 
 def check_vertical_win(board):
   
@@ -41,6 +41,7 @@ def check_vertical_win(board):
 
   return None
 
+
 def check_diagonal_win(board):
   
   if board[0][0] == "X" and board[1][1] == "X" and board[2][2] == "X":
@@ -57,8 +58,9 @@ def check_diagonal_win(board):
 
   return None
 
-def get_winner(board):
 
+def get_winner(board):
+  
   if check_horizontal_win(board) == "X" or check_horizontal_win(board) == "O":
     return check_horizontal_win(board)
 
@@ -67,7 +69,6 @@ def get_winner(board):
 
   elif check_vertical_win(board) == "X" or check_vertical_win(board) == "O":
     return check_vertical_win(board)
-
 
   else :
     return None
