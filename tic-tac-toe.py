@@ -118,3 +118,13 @@ def play_game():
   print(win_msg)
 
   return winner
+
+
+def tic_tac_toe():
+  while True:
+    print()
+    print('*_ '*10+'NEW MATCH'+' _*'*10)
+    print()
+    play_game()
+    
+tic_tac_toe()
