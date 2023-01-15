@@ -74,6 +74,24 @@ def get_winner(board):
   else :
     return None
 
+ 
+def get_move_coordinates(board):
+
+  while True:
+    
+    coordinate_x = int(input("Enter coordinate x:"))
+    coordinate_y = int(input("Enter coordinate y:"))
+
+    if coordinate_x >= 0 and coordinate_x <3 and coordinate_y >= 0 and coordinate_y <3:
+      if board[coordinate_x][coordinate_y] == " ":
+        return coordinate_x,coordinate_y
+        
+      else : 
+        print("Already taken!")
+
+    else:
+      print("Wrong coordinate.Please enter a coordinate between 0 and 2 :) ")
+
   
 def print_board(board, n_spaces_offset=25):
   offset = ' '*n_spaces_offset
