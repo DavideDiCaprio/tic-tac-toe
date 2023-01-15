@@ -102,7 +102,8 @@ def print_board(board, n_spaces_offset=25):
   print(offset+'_'*11)
   print(offset+f' {board[2][0]} | {board[2][1]} | {board[2][2]}')
   print()
-  
+ 
+
 def play_game():
 
   board = ([" "," "," "],[" "," "," "],[" "," "," "])
@@ -114,7 +115,6 @@ def play_game():
     
   player2 = 'X' if player1 == 'O' else 'O' 
   
-
   print_board(board)
 
   while get_winner(board) == None and is_any_move_possible(board):
