@@ -84,3 +84,37 @@ def print_board(board, n_spaces_offset=25):
   print(offset+'_'*11)
   print(offset+f' {board[2][0]} | {board[2][1]} | {board[2][2]}')
   print()
+  
+def play_game():
+
+  board = ([" "," "," "],[" "," "," "],[" "," "," "])
+
+  player1 = input("Hi Player 1. Select X or O: ")
+  while player1 not in ['O', 'X']:
+    print('You must pick either X or O !')
+    player1 = input("Hi player. Select X or O: ")
+    
+  player2 = 'X' if player1 == 'O' else 'O' 
+  
+
+  print_board(board)
+
+  while get_winner(board) == None and is_any_move_possible(board):
+
+    print("Player 1 is your turn...")
+    x,y = get_move_coordinates(board)
+    board[x][y] = player1
+    print_board(board)
+
+    if get_winner(board) == None and is_any_move_possible(board):
+
+      print("Player 2 is your turn...")
+      x,y = get_move_coordinates(board)
+      board[x][y] = player2
+      print_board(board)
+
+  winner = get_winner(board)
+  win_msg = f'Player {winner} wins!' if winner is not None else 'The match ends in a Draw!'
+  print(win_msg)
+
+  return winner
