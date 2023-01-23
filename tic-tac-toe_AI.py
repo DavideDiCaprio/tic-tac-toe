@@ -1,5 +1,5 @@
 import random
-import time 
+from copy import deepcopy
 
 
 def is_any_move_possible(board) -> bool:
@@ -129,3 +129,25 @@ def tic_tac_toe():
   simulate_game()
     
 tic_tac_toe()
+
+
+def simulate_game_n_times(n_times, board, next_player_symbol):
+  list_of_outcomes = []
+  while len(list_of_outcomes) != n_times:
+    list_of_outcomes.append(simulate_game(board = deepcopy(board),next_player_symbol=next_player_symbol))
+  return list_of_outcomes
+
+
+def measure_frequency_of_outcome(outcome, list_of_outcomes):
+  count = 0
+  for i in range(len(list_of_outcomes)):
+    if outcome == list_of_outcomes[i]:
+      count+=1
+  print(f'The frequency of {outcome} is {count/len(list_of_outcomes):.2%}')
+
+
+def measure_frequency_of_outcomes(list_of_outcomes):
+  observed_outcomes = list(set(list_of_outcomes)) 
+  for o in observed_outcomes:
+    measure_frequency_of_outcome(outcome=o, list_of_outcomes=list_of_outcomes)
+
