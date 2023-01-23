@@ -150,4 +150,10 @@ def measure_frequency_of_outcomes(list_of_outcomes):
   observed_outcomes = list(set(list_of_outcomes)) 
   for o in observed_outcomes:
     measure_frequency_of_outcome(outcome=o, list_of_outcomes=list_of_outcomes)
+    
+    
+    '''example, return probability of outcome(X win,O win,draw):
+    
+    measure_frequency_of_outcomes(simulate_game_n_times(n_times=500000,board=[["X"," "," "],[" ","O"," "],[" "," "," "]],next_player_symbol="X"))'''
+
 
