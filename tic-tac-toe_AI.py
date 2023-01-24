@@ -151,11 +151,14 @@ def measure_frequency_of_outcomes(list_of_outcomes):
   for o in observed_outcomes:
     measure_frequency_of_outcome(outcome=o, list_of_outcomes=list_of_outcomes)
     
+'''Example:
     
-    '''example, return probability of outcome(X win,O win,draw):
-    
-    measure_frequency_of_outcomes(simulate_game_n_times(n_times=500000,board=[["X"," "," "],[" ","O"," "],[" "," "," "]],next_player_symbol="X"))'''
+measure_frequency_of_outcomes(simulate_game_n_times(n_times=500000,board=[["X"," "," "],[" ","O"," "],[" "," "," "]],next_player_symbol="X"))
 
+#Example output: 
+Frequency of X: 30.00%
+Frequency of None: 50.00%
+Frequency of O: 20.00% '''
     
 def get_free_positions(board):
   free_positions = []
