@@ -157,11 +157,11 @@ def measure_frequency_of_outcomes(list_of_outcomes):
     measure_frequency_of_outcomes(simulate_game_n_times(n_times=500000,board=[["X"," "," "],[" ","O"," "],[" "," "," "]],next_player_symbol="X"))'''
 
     
-def free_position(board):
-  free_position = []
+def get_free_positions(board):
+  free_positions = []
   for i in range(len(board)):
     for j in range(len(board[i])):
       if board[i][j] == " ":
-        free_position.append((i,j))
+        free_positions.append((i,j))
 
-  return free_position
+  return free_positions
