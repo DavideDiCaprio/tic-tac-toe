@@ -51,7 +51,7 @@ def get_available_coordinates(board):
   return available_coordinates
 
 
-def pick_best_move(board, player_symbol):
+def pick_best_move(board, player_symbol,n_simulations):
 
   list_of_possible_moves = get_available_coordinates(board=board)
   odds_of_winning_per_each_move = []
@@ -68,7 +68,7 @@ def pick_best_move(board, player_symbol):
     x,y = list_of_possible_moves[i]
     candidate_board[x][y] = player_symbol
 
-    simulated_outcomes = simulate_game_n_times(n_times=1000, board=candidate_board, next_player_symbol=next_player_symbol)
+    simulated_outcomes = simulate_game_n_times(n_times=n_simulations, board=candidate_board, next_player_symbol=next_player_symbol)
     frequency_of_wins = measure_frequency_of_outcome(outcome=player_symbol, list_of_outcomes=simulated_outcomes)
     odds_of_winning_per_each_move.append(frequency_of_wins)
 
@@ -159,10 +159,14 @@ def get_move_coordinates(board):
 
   while True:
     
-    coordinate_x = int(input("Enter coordinate x:"))
-    coordinate_y = int(input("Enter coordinate y:"))
+    coordinate_x = input("Enter coordinate x:")
+    coordinate_y = input("Enter coordinate y:")
+    
+    allowed_input = ["0","1","2"]
 
-    if coordinate_x >= 0 and coordinate_x <3 and coordinate_y >= 0 and coordinate_y <3:
+    if coordinate_x in allowed_input and coordinate_y in allowed_input:
+      coordinate_x = int(coordinate_x)
+      coordinate_y = int(coordinate_y)
       if board[coordinate_x][coordinate_y] == " ":
         return coordinate_x,coordinate_y
         
@@ -194,8 +198,14 @@ def computer_move(board):
       return x,y
 
 
-def play_game():
-
+def play_game(user_selected_challange_level):
+  
+  challange_level = {
+      "Beginner": 5,
+      "Intermediate" : 20,
+      "Advanced": 1000
+      }
+    
   board = ([" "," "," "],[" "," "," "],[" "," "," "])
 
   player = input("Hi Player. Select X or O: ")
@@ -218,7 +228,7 @@ def play_game():
     if get_winner(board) == None and is_any_move_possible(board):
 
       print("My turn....")
-      x,y = pick_best_move(board=board,player_symbol=player)
+      x,y = pick_best_move(board=board,player_symbol=player,n_simulations=challange_level[user_selected_challange_level])
       board[x][y] = computer
       print_board(board)
 
@@ -236,10 +246,13 @@ def play_game():
 
 
 def tic_tac_toe():
-  while True:
-    print()
-    print('*_ '*10+'NEW MATCH'+' _*'*10)
-    print()
-    play_game()
+    
+    user_selected_challange_level = input("Select challange level : Beginner, Intermediate, Advanced.")
+    
+    while True:
+        print()
+        print('*_ '*10+'NEW MATCH'+' _*'*10)
+        print()
+        play_game(user_selected_challange_level=user_selected_challange_level)
     
 tic_tac_toe()
