@@ -1,5 +1,6 @@
 import random
 from copy import deepcopy
+import tic_tac_toe_utils.py
 
 
 def simulate_game(board,next_player_symbol):
@@ -78,14 +79,7 @@ def pick_best_move(board, player_symbol,n_simulations):
       
   return list_of_possible_moves[best_move_idx]
 
-
-def is_any_move_possible(board) -> bool:
-  
-  for i in range(len(board)):
-    if ' ' in board[i]:
-      return True
-
-  return False
+tic_tac_toe_utils.is_any_move_possibile().
 
 
 def check_horizontal_win(board):
