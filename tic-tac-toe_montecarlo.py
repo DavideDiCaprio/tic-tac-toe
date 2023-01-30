@@ -198,9 +198,9 @@ def computer_move(board):
       return x,y
 
 
-def play_game(user_selected_challange_level):
+def play_game(user_selected_challenge_level):
   
-  challange_level = {
+  challenge_level = {
       "Beginner": 5,
       "Intermediate" : 20,
       "Advanced": 1000
@@ -228,7 +228,7 @@ def play_game(user_selected_challange_level):
     if get_winner(board) == None and is_any_move_possible(board):
 
       print("My turn....")
-      x,y = pick_best_move(board=board,player_symbol=player,n_simulations=challange_level[user_selected_challange_level])
+      x,y = pick_best_move(board=board,player_symbol=player,n_simulations=challenge_level[user_selected_challenge_level])
       board[x][y] = computer
       print_board(board)
 
@@ -247,12 +247,12 @@ def play_game(user_selected_challange_level):
 
 def tic_tac_toe():
     
-    user_selected_challange_level = input("Select challange level : Beginner, Intermediate, Advanced.")
+    user_selected_challenge_level = input("Select challange level : Beginner, Intermediate, Advanced.")
     
     while True:
         print()
         print('*_ '*10+'NEW MATCH'+' _*'*10)
         print()
-        play_game(user_selected_challange_level=user_selected_challange_level)
+        play_game(user_selected_challenge_level=user_selected_challenge_level)
     
 tic_tac_toe()
