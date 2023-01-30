@@ -160,11 +160,39 @@ Frequency of X: 30.00%
 Frequency of None: 50.00%
 Frequency of O: 20.00% '''
     
-def get_free_positions(board):
-  free_positions = []
+def get_available_coordinates(board):
+  available_coordinates = []
   for i in range(len(board)):
     for j in range(len(board[i])):
       if board[i][j] == " ":
-        free_positions.append((i,j))
+        available_coordinates.append((i,j))
 
-  return free_positions
+  return available_coordinates
+
+
+def pick_best_move(board, player_symbol):
+
+  list_of_possible_moves = get_available_coordinates(board=board)
+  odds_of_winning_per_each_move = []
+  best_chance = 0
+  next_player_symbol = "O"
+  best_move_idx = 0
+
+  if player_symbol == "O":
+    next_player_symbol = "X"
+    
+  for i in range(len(list_of_possible_moves)):
+
+    candidate_board = deepcopy(board)
+    x,y = list_of_possible_moves[i]
+    candidate_board[x][y] = player_symbol
+
+    simulated_outcomes = simulate_game_n_times(n_times=1000, board=candidate_board, next_player_symbol=next_player_symbol)
+    frequency_of_wins = measure_frequency_of_outcome(outcome=player_symbol, list_of_outcomes=simulated_outcomes)
+    odds_of_winning_per_each_move.append(frequency_of_wins)
+
+    if  frequency_of_wins >= best_chance:
+      best_chance =  frequency_of_wins
+      best_move_idx = i
+      
+  return list_of_possible_moves[best_move_idx]
