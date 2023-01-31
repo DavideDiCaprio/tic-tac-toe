@@ -1,21 +1,21 @@
 import random
 from copy import deepcopy
-import tic_tac_toe_utils.py
+import tic_tac_toe_utils
 
 
 def simulate_game(board,next_player_symbol):
     
-  while get_winner(board) == None and is_any_move_possible(board):
+  while tic_tac_toe_utils.get_winner(board) == None and tic_tac_toe_utils.is_any_move_possible(board):
 
-    x,y = computer_move(board)
+    x,y = tic_tac_toe_utils.computer_move(board)
     board[x][y] = next_player_symbol
 
-    if get_winner(board) == None and is_any_move_possible(board):
+    if tic_tac_toe_utils.get_winner(board) == None and tic_tac_toe_utils.is_any_move_possible(board):
 
-      x,y = computer_move(board)
+      x,y = tic_tac_toe_utils.computer_move(board)
       board[x][y] = next_player_symbol
 
-  winner = get_winner(board)
+  winner = tic_tac_toe_utils.get_winner(board)
   return winner
 
 
@@ -79,75 +79,6 @@ def pick_best_move(board, player_symbol,n_simulations):
       
   return list_of_possible_moves[best_move_idx]
 
-tic_tac_toe_utils.is_any_move_possibile().
-
-
-def check_horizontal_win(board):
-
-  for i in range(len(board)):
-    if board[i] == ["O","O","O"]:
-      return "O"
-    elif board[i] == ["X","X","X"]:
-      return "X"
-      
-  return None 
-
-
-def check_vertical_win(board):
-  
-  if board[0][0] == "X" and board[1][0]== "X" and board[2][0] =="X":
-    return "X"
-      
-  elif board[0][1] == "X" and board[1][1]== "X" and board[2][1] =="X":
-    return "X"
-    
-  elif board[0][2] == "X" and board[1][2]== "X" and board[2][2] =="X":
-    return "X"
-
-  elif board[0][0] == "O" and board[1][0]== "O" and board[2][0] =="O":
-    return "O"
-      
-  elif board[0][1] == "O" and board[1][1]== "O" and board[2][1] =="O":
-    return "O"
-    
-  elif board[0][2] == "O" and board[1][2]== "O" and board[2][2] =="O":
-    return "O"
-
-  return None
-
-
-def check_diagonal_win(board):
-  
-  if board[0][0] == "X" and board[1][1] == "X" and board[2][2] == "X":
-    return "X"
-    
-  elif board[0][2] == "X" and board[1][1] == "X" and board[2][0] == "X":
-    return "X"
-
-  elif board[0][0] == "O" and board[1][1] == "O" and board[2][2] == "O":
-    return "O"
-    
-  elif board[0][2] == "O" and board[1][1] == "O" and board[2][0] == "O":
-    return "O"
-
-  return None
-
-
-def get_winner(board):
-
-  if check_horizontal_win(board) == "X" or check_horizontal_win(board) == "O":
-    return check_horizontal_win(board)
-
-  elif check_diagonal_win(board) == "X" or check_diagonal_win(board) == "O":
-    return check_diagonal_win(board)
-
-  elif check_vertical_win(board) == "X" or check_vertical_win(board) == "O":
-    return check_vertical_win(board)
-
-
-  else :
-    return None
-
 
 def get_move_coordinates(board):
 
@@ -171,27 +102,6 @@ def get_move_coordinates(board):
       print("Wrong coordinate.Please enter a coordinate between 0 and 2 :) ")
 
 
-def print_board(board, n_spaces_offset=25):
-  offset = ' '*n_spaces_offset
-  print()
-  print(offset+f' {board[0][0]} | {board[0][1]} | {board[0][2]}')
-  print(offset+'_'*11)
-  print(offset+f' {board[1][0]} | {board[1][1]} | {board[1][2]}')
-  print(offset+'_'*11)
-  print(offset+f' {board[2][0]} | {board[2][1]} | {board[2][2]}')
-  print()
-
-
-def computer_move(board):
-  
-  while True:
-    x = random.randint(0,2)
-    y = random.randint(0,2)
-
-    if board[x][y] == " ":
-      return x,y
-
-
 def play_game(user_selected_challenge_level):
   
   challenge_level = {
@@ -210,23 +120,23 @@ def play_game(user_selected_challenge_level):
   computer = 'X' if player == 'O' else 'O' 
   
 
-  print_board(board)
+  tic_tac_toe_utils.print_board(board)
 
-  while get_winner(board) == None and is_any_move_possible(board):
+  while tic_tac_toe_utils.get_winner(board) == None and tic_tac_toe_utils.is_any_move_possible(board):
 
     print("Player is your turn...")
     x,y = get_move_coordinates(board)
     board[x][y] = player
-    print_board(board)
+    tic_tac_toe_utils.print_board(board)
 
-    if get_winner(board) == None and is_any_move_possible(board):
+    if tic_tac_toe_utils.get_winner(board) == None and tic_tac_toe_utils.is_any_move_possible(board):
 
       print("My turn....")
       x,y = pick_best_move(board=board,player_symbol=player,n_simulations=challenge_level[user_selected_challenge_level])
       board[x][y] = computer
-      print_board(board)
+      tic_tac_toe_utils.print_board(board)
 
-  winner = get_winner(board)
+  winner = tic_tac_toe_utils.get_winner(board)
   
   if winner == player:
     print('You win!') 
